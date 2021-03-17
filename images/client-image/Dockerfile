@@ -15,7 +15,7 @@
 ###############################################################################
 
 ###############################################################################
-# Build Click Count Job
+# Build`
 ###############################################################################
 
 FROM maven:3.6-jdk-8-slim AS builder
@@ -58,11 +58,18 @@ RUN wget -P /opt/sql-client/lib/ https://repo.maven.apache.org/maven2/org/apache
     wget -P /opt/sql-client/lib/ https://repo.maven.apache.org/maven2/mysql/mysql-connector-java/8.0.19/mysql-connector-java-8.0.19.jar; \
 # Create data folders
     mkdir -p /opt/data; \
-    mkdir -p /opt/data/stream; \
+    mkdir -p /opt/data/stream; 
 # Download data files
-    wget -O /opt/data/driverChanges.txt.gz 'https://drive.google.com/uc?export=download&id=1pf4tfv-YpoVQ9_O0948M8oXeCfVH-0MH'; \
-    wget -O /opt/data/fares.txt.gz 'https://drive.google.com/uc?export=download&id=1SriiwcIdMvY7uJsWSY4Hhh32iO3F4ND2'; \
-    wget -O /opt/data/rides.txt.gz 'https://drive.google.com/uc?export=download&id=1gY8W07OFvB7_4lHlAyingM4WQzs0_8lT';
+#    wget -sO /opt/data/driverChanges.txt.gz 'https://drive.google.com/uc?export=download&id=1pf4tfv-YpoVQ9_O0948M8oXeCfVH-0MH'; \
+#    wget -O /opt/data/fares.txt.gz 'https://drive.google.com/uc?export=download&id=1SriiwcIdMvY7uJsWSY4Hhh32iO3F4ND2'; \
+#    wget -O /opt/data/rides.txt.gz 'https://drive.google.com/uc?export=download&id=1gY8W07OFvB7_4lHlAyingM4WQzs0_8lT';
+
+COPY data/driverChanges.txt.gz /opt/data/
+COPY data/fares.txt.gz /opt/data/
+COPY data/rides.txt.gz /opt/data/
+
+
+
 
 # Copy configuration
 COPY conf/* /opt/flink/conf/
